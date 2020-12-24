@@ -9,7 +9,7 @@ LocalPlayerTab:CreateToggle("No Stun & Cooldown", function(value)
         if shared.NoStun then
 			for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
 				if v:IsA("Folder") then
-					if v.Name == "PUNCHM2COOLDOWN" or v.Name == "Busy" or v.Name == "Superslow" or v.Name == "Comboing" or v.Name == "PunchCooldown" or v.Name == "CTag" or v.Name == "Blocking" or v.Name == "IgnisCooldown" or v.Name == "Helpless" or v.Name == "StepBlock" or v.Name == "Staggered" or v.Name == "Ragdolled" or v.Name == "Superamor" or v.Name == "Nospeedupdate" or v.Name == "Impaled" or v.Name == "manashield" or v.Name == "IFrames" then
+					if v.Name == "PUNCHM2COOLDOWN" or v.Name == "Busy" or v.Name == "Superslow" or v.Name == "Comboing" or v.Name == "PunchCooldown" or v.Name == "CTag" or v.Name == "Blocking" or v.Name == "IgnisCooldown" or v.Name == "Helpless" or v.Name == "StepBlock" or v.Name == "Staggered" or v.Name == "Ragdolled" or v.Name == "Superamor" or v.Name == "NoSpeedUpdate" or v.Name == "Impaled" or v.Name == "manashield" or v.Name == "IFrames" then
 						v:Remove()
 					end
 				end
@@ -19,6 +19,8 @@ LocalPlayerTab:CreateToggle("No Stun & Cooldown", function(value)
 						v.Cooldown:Remove()
 					elseif v:FindFirstChild("MainCooldown") then
 						v.MainCooldown:Remove()
+					elseif v:FindFirstChild("MisogiCooldown") then
+						v.MisogiCooldown:Remove()
 					end
 				end
 			end		
@@ -138,6 +140,7 @@ local Spells = {
 	["Tenebris"] = 100;
 	["Gate"] = 80;
 	["Fimbulvetr"] = 85;
+	["Radium"] = 85;
 }
 
 LocalPlayerTab:CreateToggle("Spell Adjust", function(value) 
@@ -240,4 +243,59 @@ VisualTab:CreateToggle("Max Zoom", function(value)
 	else
         game.Players.LocalPlayer.CameraMaxZoomDistance = 50
     end
+end)
+
+local Admins = {
+	["shadow8877sonic"] = "Mod";
+	["DrPixel"] = "Owner";
+}
+
+
+
+for i,v in pairs(game.Players:GetPlayers()) do
+	for I,V in pairs(Admins) do
+		if v.Name == I then
+			game.StarterGui:SetCore("SendNotification", {
+				Title = "Admin Notify";
+				Text = v.Name .. " Is in the game And Is A Mod/Admin";
+				Duration = 6
+			})
+		end
+	end
+end
+
+game.Players.PlayerAdded:Connect(function(v)
+	for I,V in pairs(Admins) do
+		if v.Name == I then
+			game.StarterGui:SetCore("SendNotification", {
+				Title = "Admin Notify";
+				Text = v.Name .. " Has Joined And Is A Mod/Admin";
+				Duration = 6
+			})
+		end
+	end
+end)
+
+game.Players.PlayerRemoving:Connect(function(v)
+	for I,V in pairs(Admins) do
+		if v.Name == I then
+			game.StarterGui:SetCore("SendNotification", {
+				Title = "Admin Notify";
+				Text = v.Name .. " Has Left And Is A Mod/Admin";
+				Duration = 6
+			})
+		end
+	end
+end)
+
+game.Workspace.ChildAdded:Connect(function(v)
+	if v:IsA("Tool") then
+		if v.Name == "Ice Essence" or v.Name == "Lannis Amulet" or v.Name == "Fairfrozen" or v.Name == "Lost Bulwark" or v.Name == "Spidercloak" or v.Name == "Philo Stone" or v.Name == "Betrayer's Amulet" or v.Name == "Angel Feather" or v.Name == "Lost Bulwark" then
+			game.StarterGui:SetCore("SendNotification", {
+				Title = "Artifact Notify";
+				Text = v.Name .. " Has Spawned";
+				Duration = 6
+			})		
+		end
+	end
 end)
