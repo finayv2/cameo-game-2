@@ -98,6 +98,8 @@ LocalPlayerTab:CreateToggle("No Curse Stacks", function(value)
     end
 end)
 
+local LastPosition;
+
 LocalPlayerTab:CreateToggle("Artifact Collecter", function(value) 
     shared.ARF = value
     while wait() do
@@ -105,7 +107,10 @@ LocalPlayerTab:CreateToggle("Artifact Collecter", function(value)
 			for i,v in pairs(game.Workspace:GetChildren()) do
 				if v:IsA("Tool") then
 					if v.Name == "Ice Essence" or v.Name == "Lannis Amulet" or v.Name == "Fairfrozen" or v.Name == "Lost Bulwark" or v.Name == "Spidercloak" or v.Name == "Philo Stone" or v.Name == "Betrayer's Amulet" or v.Name == "Angel Feather" or v.Name == "Lost Bulwark" then
+						LastPosition = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
 						game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Handle.CFrame
+						wait(0.5)
+						game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = LastPosition
 					end
 				end
 			end
@@ -170,9 +175,6 @@ LocalPlayerTab:CreateToggle("Spell Adjust", function(value)
     end
 end)
 
-LocalPlayerTab:CreateButton("Scroll Roulette", function() 
-    fireclickdetector(game:GetService("Workspace").NPCs.Inari["Left Arm"].ClickDetector)
-end)
 
 
 LocalPlayerTab:CreateSlider("Mana Amount", 0, 100, function(arg) 
@@ -203,6 +205,9 @@ LocalPlayerTab:CreateDropDown("Gate Teleports", Gat, function(Talker)
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = GateSpots[Talker]
 end)
 
+LocalPlayerTab:CreateButton("Scroll Roulette", function() 
+    fireclickdetector(game:GetService("Workspace").NPCs.Inari["Left Arm"].ClickDetector)
+end)
 
 
 local VisualTab = Library:CreateTab("Visuals", "Visuals Tab")
@@ -248,6 +253,18 @@ end)
 local Admins = {
 	["shadow8877sonic"] = "Mod";
 	["DrPixel"] = "Owner";
+	["lockpickk"] = "Mod";
+	["thegamerfromtheskys"] = "Mod";
+	["Drapid"] = "Mod";
+	["thegamerfromtheskys"] = "Mod";
+	["T32M"] = "Mod";
+	["theoowen"] = "Mod";
+	["Vluved"] = "Mod";
+	["Fri_ckyy"] = "Mod";
+	["Horatl0"] = "Mod";
+	["Crazecoop"] = "Mod";
+	["Seadoke18"] = "Mod";
+	["BestNameInGame"] = "Mod";
 }
 
 
@@ -290,7 +307,7 @@ end)
 
 game.Workspace.ChildAdded:Connect(function(v)
 	if v:IsA("Tool") then
-		if v.Name == "Ice Essence" or v.Name == "Lannis Amulet" or v.Name == "Fairfrozen" or v.Name == "Lost Bulwark" or v.Name == "Spidercloak" or v.Name == "Philo Stone" or v.Name == "Betrayer's Amulet" or v.Name == "Angel Feather" or v.Name == "Lost Bulwark" then
+		if v.Name == "Ice Essence" or v.Name == "Lannis Amulet" or v.Name == "Fairfrozen" or v.Name == "Lost Bulwark" or v.Name == "Spidercloak" or v.Name == "Philo Stone" or v.Name == "Betrayer's Amulet" or v.Name == "Angel Feather" or v.Name == "Lost Bulwark" or v.Name == "Spider Cloak" then
 			game.StarterGui:SetCore("SendNotification", {
 				Title = "Artifact Notify";
 				Text = v.Name .. " Has Spawned";
