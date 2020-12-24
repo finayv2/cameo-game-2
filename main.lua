@@ -21,6 +21,14 @@ LocalPlayerTab:CreateToggle("No Stun & Cooldown", function(value)
 						v.MainCooldown:Remove()
 					elseif v:FindFirstChild("MisogiCooldown") then
 						v.MisogiCooldown:Remove()
+					elseif v:FindFirstChild("WhiteFlameCooldown") then
+						v.WhiteFlameCooldown:Remove()
+					elseif v:FindFirstChild("IceCooldown") then
+						v.IceCooldown:Remove()
+					elseif v:FindFirstChild("FlameCooldown") then
+						v.FlameCooldown:Remove()
+					elseif v:FindFirstChild("ThunderCooldown") then
+						v.ThunderCooldown:Remove()
 					end
 				end
 			end		
@@ -76,6 +84,8 @@ LocalPlayerTab:CreateToggle("No Poison", function(value)
     end
 end)
 
+
+
 LocalPlayerTab:CreateToggle("No Fall Damage", function(value) 
     shared.NoFall = value
     while wait() do
@@ -104,12 +114,11 @@ LocalPlayerTab:CreateToggle("Artifact Collecter", function(value)
     shared.ARF = value
     while wait() do
 		if shared.ARF then
+			LastPosition = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
 			for i,v in pairs(game.Workspace:GetChildren()) do
 				if v:IsA("Tool") then
 					if v.Name == "Ice Essence" or v.Name == "Lannis Amulet" or v.Name == "Fairfrozen" or v.Name == "Lost Bulwark" or v.Name == "Spidercloak" or v.Name == "Philo Stone" or v.Name == "Betrayer's Amulet" or v.Name == "Angel Feather" or v.Name == "Lost Bulwark" then
-						LastPosition = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
 						game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Handle.CFrame
-						wait(0.5)
 						game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = LastPosition
 					end
 				end
@@ -194,6 +203,10 @@ local GateSpots = {
 	["Deepforest 2"] = game:GetService("Workspace").MouseIgnore.GateSpots.Deepforest.Tree.CFrame;
 	["Tundra 1"] = game:GetService("Workspace").MouseIgnore.GateSpots.Tundra.Black.CFrame;
 	["Tundra 2"] = game:GetService("Workspace").MouseIgnore.GateSpots.Tundra.Ridge.CFrame;
+	["Tundra 3"] = game:GetService("Workspace").MouseIgnore.GateSpots.Tundra.Hoss.CFrame;
+	["Tundra 4"] = game:GetService("Workspace").MouseIgnore.GateSpots.Tundra.Cave.CFrame;
+	["Tundra 5"] = game:GetService("Workspace").MouseIgnore.GateSpots.Tundra.Sigma.CFrame;
+	["Tundra 6"] = game:GetService("Workspace").MouseIgnore.GateSpots.Tundra.Enibras.CFrame;
 }
 
 local Gat = {}
