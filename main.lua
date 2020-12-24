@@ -146,6 +146,7 @@ local Spells = {
 	["Gate"] = 80;
 	["Fimbulvetr"] = 85;
 	["Radium"] = 85;
+	["Percutiens"] = 65;
 }
 
 LocalPlayerTab:CreateToggle("Spell Adjust", function(value) 
@@ -269,6 +270,14 @@ local Admins = {
 
 
 
+local newmusic = Instance.new("Sound")
+newmusic.Parent = game.Workspace
+newmusic.SoundId = "rbxassetid://1579337956"
+newmusic.Name = "RUN MODS"
+
+
+
+
 for i,v in pairs(game.Players:GetPlayers()) do
 	for I,V in pairs(Admins) do
 		if v.Name == I then
@@ -277,6 +286,11 @@ for i,v in pairs(game.Players:GetPlayers()) do
 				Text = v.Name .. " Is in the game And Is A Mod/Admin";
 				Duration = 6
 			})
+			spawn(function()
+				newmusic:Play()
+				wait(6.5)
+				newmusic:Stop()
+			end)
 		end
 	end
 end
@@ -289,6 +303,11 @@ game.Players.PlayerAdded:Connect(function(v)
 				Text = v.Name .. " Has Joined And Is A Mod/Admin";
 				Duration = 6
 			})
+			spawn(function()
+				newmusic:Play()
+				wait(6.5)
+				newmusic:Stop()
+			end)
 		end
 	end
 end)
@@ -301,6 +320,11 @@ game.Players.PlayerRemoving:Connect(function(v)
 				Text = v.Name .. " Has Left And Is A Mod/Admin";
 				Duration = 6
 			})
+			spawn(function()
+				newmusic:Play()
+				wait(6.5)
+				newmusic:Stop()
+			end)
 		end
 	end
 end)
