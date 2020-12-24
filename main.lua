@@ -117,7 +117,7 @@ LocalPlayerTab:CreateToggle("Artifact Collecter", function(value)
 			LastPosition = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
 			for i,v in pairs(game.Workspace:GetChildren()) do
 				if v:IsA("Tool") then
-					if v.Name == "Ice Essence" or v.Name == "Lannis Amulet" or v.Name == "Fairfrozen" or v.Name == "Lost Bulwark" or v.Name == "Spidercloak" or v.Name == "Philo Stone" or v.Name == "Betrayer's Amulet" or v.Name == "Angel Feather" or v.Name == "Lost Bulwark" then
+					if v.Name == "Ice Essence" or v.Name == "Lannis Amulet" or v.Name == "Fairfrozen" or v.Name == "Lost Bulwark" or v.Name == "Spider Cloak" or v.Name == "Philo Stone" or v.Name == "Betrayer's Amulet" or v.Name == "Angel Feather" or v.Name == "Lost Bulwark" then
 						game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Handle.CFrame
 						game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = LastPosition
 					end
@@ -279,6 +279,7 @@ local Admins = {
 	["Crazecoop"] = "Mod";
 	["Seadoke18"] = "Mod";
 	["BestNameInGame"] = "Mod";
+	["stahby"] = "Mod";
 }
 
 
@@ -344,7 +345,7 @@ end)
 
 game.Workspace.ChildAdded:Connect(function(v)
 	if v:IsA("Tool") then
-		if v.Name == "Ice Essence" or v.Name == "Lannis Amulet" or v.Name == "Fairfrozen" or v.Name == "Lost Bulwark" or v.Name == "Spidercloak" or v.Name == "Philo Stone" or v.Name == "Betrayer's Amulet" or v.Name == "Angel Feather" or v.Name == "Lost Bulwark" or v.Name == "Spider Cloak" then
+		if v.Name == "Ice Essence" or v.Name == "Lannis Amulet" or v.Name == "Fairfrozen" or v.Name == "Lost Bulwark" or v.Name == "Spider Cloak" or v.Name == "Philo Stone" or v.Name == "Betrayer's Amulet" or v.Name == "Angel Feather" or v.Name == "Lost Bulwark" or v.Name == "Spider Cloak" then
 			game.StarterGui:SetCore("SendNotification", {
 				Title = "Artifact Notify";
 				Text = v.Name .. " Has Spawned";
