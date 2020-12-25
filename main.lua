@@ -9,7 +9,7 @@ LocalPlayerTab:CreateToggle("No Stun & Cooldown", function(value)
         if shared.NoStun then
 			for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
 				if v:IsA("Folder") then
-					if v.Name == "PUNCHM2COOLDOWN" or v.Name == "Busy" or v.Name == "Superslow" or v.Name == "Comboing" or v.Name == "PunchCooldown" or v.Name == "CTag" or v.Name == "Blocking" or v.Name == "IgnisCooldown" or v.Name == "Helpless" or v.Name == "StepBlock" or v.Name == "Staggered" or v.Name == "Ragdolled" or v.Name == "Superamor" or v.Name == "NoSpeedUpdate" or v.Name == "Impaled" or v.Name == "manashield" or v.Name == "IFrames" or v.Name == "ANGELFEATHERCD" or v.Name == "LannisCD" then
+					if v.Name == "PUNCHM2COOLDOWN" or v.Name == "Busy" or v.Name == "Superslow" or v.Name == "Comboing" or v.Name == "PunchCooldown" or v.Name == "CTag" or v.Name == "Blocking" or v.Name == "IgnisCooldown" or v.Name == "Helpless" or v.Name == "StepBlock" or v.Name == "Staggered" or v.Name == "Ragdolled" or v.Name == "Superamor" or v.Name == "NoSpeedUpdate" or v.Name == "Impaled" or v.Name == "manashield" or v.Name == "IFrames" or v.Name == "ANGELFEATHERCD" or v.Name == "LannisCD" or v.Name == "SnapCooldown" then
 						v:Remove()
 					end
 				end
