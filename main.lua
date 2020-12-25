@@ -9,7 +9,7 @@ LocalPlayerTab:CreateToggle("No Stun & Cooldown", function(value)
         if shared.NoStun then
 			for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
 				if v:IsA("Folder") then
-					if v.Name == "PUNCHM2COOLDOWN" or v.Name == "Busy" or v.Name == "Superslow" or v.Name == "Comboing" or v.Name == "PunchCooldown" or v.Name == "CTag" or v.Name == "Blocking" or v.Name == "IgnisCooldown" or v.Name == "Helpless" or v.Name == "StepBlock" or v.Name == "Staggered" or v.Name == "Ragdolled" or v.Name == "Superamor" or v.Name == "NoSpeedUpdate" or v.Name == "Impaled" or v.Name == "manashield" or v.Name == "IFrames" then
+					if v.Name == "PUNCHM2COOLDOWN" or v.Name == "Busy" or v.Name == "Superslow" or v.Name == "Comboing" or v.Name == "PunchCooldown" or v.Name == "CTag" or v.Name == "Blocking" or v.Name == "IgnisCooldown" or v.Name == "Helpless" or v.Name == "StepBlock" or v.Name == "Staggered" or v.Name == "Ragdolled" or v.Name == "Superamor" or v.Name == "NoSpeedUpdate" or v.Name == "Impaled" or v.Name == "manashield" or v.Name == "IFrames" or v.Name == "ANGELFEATHERCD" or v.Name == "LannisCD" then
 						v:Remove()
 					end
 				end
@@ -88,13 +88,15 @@ end)
 
 LocalPlayerTab:CreateToggle("No Fall Damage", function(value) 
     shared.NoFall = value
-    while wait() do
-        if shared.NoFall then
+    if shared.NoFall then
 
-			game:GetService("Players").LocalPlayer.Character.Rolled:FireServer()
-
-        end
-    end
+		local NoFallMoment = Instance.new("Folder")
+		NoFallMoment.Name = "ANGELFEATHER"
+		NoFallMoment.Parent = game.Players.LocalPlayer.Character
+	else
+		NoFallMoment:Remove()
+	end
+	
 end)
 
 LocalPlayerTab:CreateToggle("No Curse Stacks", function(value) 
@@ -152,7 +154,7 @@ local Spells = {
 	["Ignis"] = 80;
 	["Gelidus"] = 80;
 	["Tenebris"] = 100;
-	["Gate"] = 80;
+	["Gate"] = 83;
 	["Fimbulvetr"] = 85;
 	["Radium"] = 85;
 	["Percutiens"] = 65;
