@@ -1,6 +1,9 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/finayv2/Ui-Lib/main/azure%20ui%20lib%20modified.lua", true))()
 if not getgenv().MTAPIMutex then loadstring(game:HttpGet("https://raw.githubusercontent.com/KikoTheDon/MT-Api-v2/main/__source/mt-api%20v2.lua", true))() end
 getgenv().AlreadyExecuted = false
+local LocalSA = getsenv(game:GetService("Players").LocalPlayer.PlayerScripts.LocalStuff)
+
+
 local LocalPlayerTab = Library:CreateTab("LocalPlayer", "LocalPlayer Tab", "Dark")
 
 
@@ -14,7 +17,7 @@ LocalPlayerTab:CreateToggle("No Stun & Cooldown", function(value)
 						v:Remove()
 					end
 				end
-
+				LocalSA.DoubleJumpingAvailable = true 
 				if v:IsA("Tool") then
 					if v:FindFirstChild("Cooldown") then
 						v.Cooldown:Remove()
@@ -41,44 +44,44 @@ LocalPlayerTab:CreateToggle("No Stun & Cooldown", function(value)
     end
 end)
 
+--[[
 
-LocalPlayerTab:CreateToggle("No Cooldown Dodge", function(PogValue) 
-	shared.PogNoVCool = PogValue
+LocalPlayerTab:CreateToggle("No Cooldown Dodge", function(value) 
+    shared.NoCooldownDodge = value
 end)
-
-if getgenv().AlreadyExecuted == false then
+spawn(function()
 	ogWait = hookfunction(wait, function(x)
-		if shared.PogNoVCool and getcallingscript().Name == "LocalStuff" and not checkcaller() then
-			return ogWait(0.3)
+		if shared.NoCooldownDodge and getcallingscript().Name == "LocalStuff" and not checkcaller() and x == 2 then
+			return ogWait(0.1)
 		else
 			return ogWait(x)
 		end
-	end)
-end
+	end) 
+end)
+
+-]]
 
 LocalPlayerTab:CreateToggle("Remove Kill Bricks", function(value) 
     shared.RemoEKillBricks = value
 	if shared.RemoEKillBricks then
 		for i,v in pairs(game:GetService("Workspace").Map:GetChildren()) do
 			if v.Name == "Kill" then
-				v:FindFirstChild("TouchInterest"):Remove()
+				if v:FindFirstChild("TouchInterest") then
+					v:FindFirstChild("TouchInterest"):Remove()
+				end
 			end
 		end
     end
 end)
 
+
 LocalPlayerTab:CreateToggle("No Fire", function(value) 
     shared.NoFire = value
     while wait() do
 		if shared.NoFire then
-			if not game.Players.LocalPlayer.Character:FindFirstChild("IgnisCooldown") then
-				local Nof = Instance.new("Folder")
-				Nof.Parent = game.Players.LocalPlayer.Character
-				Nof.Name = "IgnisCooldown"
-			end
 			for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
 				if v:IsA("Folder") then
-					if v.Name == "Flames" or v.Name == "WhiteFlames" then
+					if v.Name == "Flames" or v.Name == "WhiteFlames" or v.Name == "BlackFlames" or v.Name == "BlackFlamesStack" then
 						v:Remove()
 					end
 				end
@@ -220,9 +223,44 @@ LocalPlayerTab:CreateSlider("WalkSpeed", 16, 500, function(arg)
 	shared.WalkSpeedValue = arg
 end)
 
-game.Players.LocalPlayer.Character.Humanoid.Changed:Connect(function()
+LocalPlayerTab:CreateSlider("Hitbox Extender", 3, 350, function(arg) 
+
+	for i,v in next, game:GetService('Players'):GetPlayers() do
+		if v.Name ~= game:GetService('Players').LocalPlayer.Name then
+			pcall(function()
+				if arg == 3 then 
+					v.Character.HumanoidRootPart.Size = Vector3.new(2, 2, 1)
+					v.Character.HumanoidRootPart.Transparency = 1
+					v.Character.HumanoidRootPart.BrickColor = BrickColor.new("Medium stone grey")
+					v.Character.HumanoidRootPart.Material = "Plastic"
+					v.Character.HumanoidRootPart.CanCollide = true
+					return
+				end
+				v.Character.HumanoidRootPart.Size = Vector3.new(arg,arg,arg)
+				v.Character.HumanoidRootPart.Transparency = 0.8
+				v.Character.HumanoidRootPart.BrickColor = BrickColor.new("Really blue")
+				v.Character.HumanoidRootPart.Material = "Neon"
+				v.Character.HumanoidRootPart.CanCollide = false
+			end)
+			
+		end
+	end
+
+end)
+
+game.Players.LocalPlayer.CharacterAdded:Connect(function(p)
+	p:WaitForChild("Humanoid").Changed:Connect(function()
+		if shared.WalkSpeedValue == 16 then return end
+	
+		p.Humanoid.WalkSpeed = shared.WalkSpeedValue
+	
+	end)
+end)
+
+game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Changed:Connect(function()
 	if shared.WalkSpeedValue == 16 then return end
-	game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = shared.WalkSpeedValue
+
+	game.Players.localPlayer.Character:WaitForChild("Humanoid").WalkSpeed = shared.WalkSpeedValue
 
 end)
 
@@ -254,6 +292,19 @@ LocalPlayerTab:CreateButton("Scroll Roulette", function()
 	fireclickdetector(game:GetService("Workspace").NPCs.Inari["Left Arm"].ClickDetector)	  
 end)
 
+--[[
+LocalPlayerTab:CreateButton("No Cooldown Dodge", function() 
+
+	ogWait = hookfunction(wait, function(x)
+		if getcallingscript().Name == "LocalStuff" and not checkcaller() and x == 2 then
+			return ogWait(0.1)
+		else
+			return ogWait(x)
+		end
+	end) 
+
+end)
+-]]
 
 
 
@@ -322,6 +373,7 @@ local Success, ErrorStatement = pcall(function()
 		["stahby"] = "322304665";
 		["Firmliest"] = "143568777";
 		["goIdiee"] = "58373448";
+		["SentinelLosing"] = "1725860698";
 	
 	}
 
@@ -407,6 +459,7 @@ end)
 
 if ErrorStatement then
 	game.Players.LocalPlayer:Kick("\n\nVERY IMPORTANT ERROR HAS OCCURED PLEASE DM cyzer#3829.\n")
+	error(ErrorStatement)
 end
 
 
