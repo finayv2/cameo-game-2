@@ -13,11 +13,10 @@ LocalPlayerTab:CreateToggle("No Stun & Cooldown", function(value)
         if shared.NoStun then
 			for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
 				if v:IsA("Folder") then
-					if v.Name == "PUNCHM2COOLDOWN" or v.Name == "Busy" or v.Name == "Superslow" or v.Name == "Comboing" or v.Name == "PunchCooldown" or v.Name == "CTag" or v.Name == "IgnisCooldown" or v.Name == "Helpless" or v.Name == "StepBlock" or v.Name == "Staggered" or v.Name == "Ragdolled" or v.Name == "Superamor" or v.Name == "NoSpeedUpdate" or v.Name == "Impaled" or v.Name == "manashield" or v.Name == "IFrames" or v.Name == "ANGELFEATHERCD" or v.Name == "LannisCD" or v.Name == "SnapCooldown" or v.Name == "BeserkCooldown" then
+					if v.Name == "PUNCHM2COOLDOWN" or v.Name == "Busy" or v.Name == "Superslow" or v.Name == "Comboing" or v.Name == "PunchCooldown" or v.Name == "CTag" or v.Name == "Helpless" or v.Name == "StepBlock" or v.Name == "Staggered" or v.Name == "Ragdolled" or v.Name == "Superamor" or v.Name == "NoSpeedUpdate" or v.Name == "manashield" or v.Name == "IFrames" or v.Name == "SnapCooldown" or v.Name == "BeserkCooldown" then
 						v:Remove()
 					end
 				end
-				LocalSA.DoubleJumpingAvailable = true 
 				if v:IsA("Tool") then
 					if v:FindFirstChild("Cooldown") then
 						v.Cooldown:Remove()
@@ -74,61 +73,8 @@ LocalPlayerTab:CreateToggle("Remove Kill Bricks", function(value)
     end
 end)
 
-
-LocalPlayerTab:CreateToggle("No Fire", function(value) 
-    shared.NoFire = value
-    while wait() do
-		if shared.NoFire then
-			for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
-				if v:IsA("Folder") then
-					if v.Name == "Flames" or v.Name == "WhiteFlames" or v.Name == "BlackFlames" or v.Name == "BlackFlamesStack" then
-						v:Remove()
-					end
-				end
-			end	
-        end
-    end
-end)
-
-LocalPlayerTab:CreateToggle("No Poison", function(value) 
-    shared.NOPOSITON = value
-    while wait() do
-        if shared.NOPOSITON then
-			for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
-				if v:IsA("Folder") then
-					if v.Name == "Poison" then
-						v:Remove()
-					end
-				end
-			end
-        end
-    end
-end)
-
-
-
-LocalPlayerTab:CreateToggle("No Fall Damage", function(value) 
-    shared.NoFall = value
-    if shared.NoFall then
-
-		local NoFallMoment = Instance.new("Folder")
-		NoFallMoment.Name = "ANGELFEATHER"
-		NoFallMoment.Parent = game.Players.LocalPlayer.Character
-	else
-		NoFallMoment:Remove()
-	end
-	
-end)
-
-LocalPlayerTab:CreateToggle("No Curse Stacks", function(value) 
-    shared.NoCS = value
-    while wait() do
-        if shared.NoCS then
-			for i,v in pairs(game.Players.LocalPlayer.Character.Stats.CStacks:GetChildren()) do
-				v:Remove()
-			end
-        end
-    end
+LocalPlayerTab:CreateToggle("Auto Mod Panic", function(value) 
+    shared.AutoModPanic = value
 end)
 
 local LastPosition;
@@ -140,7 +86,7 @@ LocalPlayerTab:CreateToggle("Artifact Collecter", function(value)
 			LastPosition = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
 			for i,v in pairs(game.Workspace:GetChildren()) do
 				if v:IsA("Tool") then
-					if v.Name == "Lannis Amulet" or v.Name == "Fairfrozen" or v.Name == "Lost Bulwark" or v.Name == "Spider Cloak" or v.Name == "Philo Stone" or v.Name == "Betrayer's Amulet" or v.Name == "Angel Feather" or v.Name == "Lost Bulwark" then
+					if v.Name == "Lannis Amulet" or v.Name == "Fairfrozen" or v.Name == "Lost Bulwark" or v.Name == "Spider Cloak" or v.Name == "Philo Stone" or v.Name == "Betrayer's Amulet" or v.Name == "Angel Feather" or v.Name == "Lost Bulwark" or v.Name == "MemoryDisc" or v.Name == "Phoenix Feather" then
 						game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Handle.CFrame
 						game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = LastPosition
 					end
@@ -150,72 +96,6 @@ LocalPlayerTab:CreateToggle("Artifact Collecter", function(value)
     end
 end)
 
-
-local ManaValue = 0
-
-LocalPlayerTab:CreateToggle("Mana Adjust", function(value) 
-    shared.InfMana = value
-    while wait() do
-        if shared.InfMana then
-			game:GetService("Players").LocalPlayer.Character.ManaCharge.Value = false
-
-			if game:GetService("Players").LocalPlayer.Character.Stats.Mana.Value >= ManaValue then
-
-				game:GetService("Players").LocalPlayer.Character.ManaChargeEnd:FireServer()
-
-			else
-
-				game:GetService("Players").LocalPlayer.Character.ManaChargeStart:FireServer()
-			end
-        end
-    end
-end)
-
-local Spells = {
-	["Ignis"] = 80;
-	["Gelidus"] = 80;
-	["Tenebris"] = 100;
-	["Gate"] = 83;
-	["Fimbulvetr"] = 85;
-	["Radium"] = 85;
-	["Percutiens"] = 65;
-}
-
-LocalPlayerTab:CreateToggle("Spell Adjust", function(value) 
-    shared.SpellAbjust = value
-    while wait() do
-		if shared.SpellAbjust then
-			for i,v in pairs(Spells) do
-				for I,V in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
-					if V:IsA("Tool") then
-						if V.Name == i then
-							
-							game:GetService("Players").LocalPlayer.Character.ManaCharge.Value = false
-
-							if game:GetService("Players").LocalPlayer.Character.Stats.Mana.Value >= Spells[V.Name] then
-
-								game:GetService("Players").LocalPlayer.Character.ManaChargeEnd:FireServer()
-
-							else
-
-								game:GetService("Players").LocalPlayer.Character.ManaChargeStart:FireServer()
-							end
-						end
-					end
-				end
-			end
-        end
-    end
-end)
-
-
-LocalPlayerTab:CreateSlider("Mana Amount", 0, 100, function(arg) 
-    ManaValue = arg
-end)
-
-LocalPlayerTab:CreateSlider("Mana Climb Speed", 1, 350, function(arg) 
-    game.Players.LocalPlayer.Character.Stats.ClimbMult.Value = arg
-end)
 
 shared.WalkSpeedValue = 16
 
@@ -229,18 +109,27 @@ LocalPlayerTab:CreateSlider("Hitbox Extender", 3, 350, function(arg)
 		if v.Name ~= game:GetService('Players').LocalPlayer.Name then
 			pcall(function()
 				if arg == 3 then 
-					v.Character.HumanoidRootPart.Size = Vector3.new(2, 2, 1)
-					v.Character.HumanoidRootPart.Transparency = 1
-					v.Character.HumanoidRootPart.BrickColor = BrickColor.new("Medium stone grey")
-					v.Character.HumanoidRootPart.Material = "Plastic"
-					v.Character.HumanoidRootPart.CanCollide = true
+					v.Character:FindFirstChild("HumanoidRootPart").Size = Vector3.new(2, 2, 1)
+					v.Character:FindFirstChild("HumanoidRootPart").Transparency = 1
+					v.Character:FindFirstChild("HumanoidRootPart").BrickColor = BrickColor.new("Medium stone grey")
+					v.Character:FindFirstChild("HumanoidRootPart").Material = "Plastic"
+					v.Character:FindFirstChild("HumanoidRootPart").CanCollide = true
 					return
 				end
-				v.Character.HumanoidRootPart.Size = Vector3.new(arg,arg,arg)
-				v.Character.HumanoidRootPart.Transparency = 0.8
-				v.Character.HumanoidRootPart.BrickColor = BrickColor.new("Really blue")
-				v.Character.HumanoidRootPart.Material = "Neon"
-				v.Character.HumanoidRootPart.CanCollide = false
+				v.CharacterAdded:Connect(function(p)
+					if arg == 3 then return end
+
+					v.Character:FindFirstChild("HumanoidRootPart").Size = Vector3.new(arg,arg,arg)
+					v.Character:FindFirstChild("HumanoidRootPart").Transparency = 0.9
+					v.Character:FindFirstChild("HumanoidRootPart").BrickColor = BrickColor.new("Really blue")
+					v.Character:FindFirstChild("HumanoidRootPart").Material = "Neon"
+					v.Character:FindFirstChild("HumanoidRootPart").CanCollide = false
+				end)
+				v.Character:FindFirstChild("HumanoidRootPart").Size = Vector3.new(arg,arg,arg)
+				v.Character:FindFirstChild("HumanoidRootPart").Transparency = 0.9
+				v.Character:FindFirstChild("HumanoidRootPart").BrickColor = BrickColor.new("Really blue")
+				v.Character:FindFirstChild("HumanoidRootPart").Material = "Neon"
+				v.Character:FindFirstChild("HumanoidRootPart").CanCollide = false
 			end)
 			
 		end
@@ -288,24 +177,191 @@ LocalPlayerTab:CreateDropDown("Gate Teleports", Gat, function(Talker)
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = GateSpots[Talker]
 end)
 
-LocalPlayerTab:CreateButton("Scroll Roulette", function() 
-	fireclickdetector(game:GetService("Workspace").NPCs.Inari["Left Arm"].ClickDetector)	  
+LocalPlayerTab:CreateButton("Hide Nickname", function() 
+	game.Players.LocalPlayer.Character.CharacterName.NA:Remove()
+	local s = Instance.new("Humanoid", game.Players.LocalPlayer.Character.CharacterName)
+	s.Name = "NA"
 end)
 
---[[
-LocalPlayerTab:CreateButton("No Cooldown Dodge", function() 
+-- ! status tab
+local StatusTab = Library:CreateTab("Status", "Status Tab", "Dark")
 
-	ogWait = hookfunction(wait, function(x)
-		if getcallingscript().Name == "LocalStuff" and not checkcaller() and x == 2 then
-			return ogWait(0.1)
-		else
-			return ogWait(x)
+StatusTab:CreateToggle("No Curse Stacks", function(value) 
+    shared.NoCS = value
+    while wait() do
+        if shared.NoCS then
+			for i,v in pairs(game.Players.LocalPlayer.Character.Stats.CStacks:GetChildren()) do
+				v:Remove()
+			end
+        end
+    end
+end)
+
+StatusTab:CreateToggle("No Cooldown Artifacts", function(value) 
+    shared.NoCooldownArtifacts = value
+    while wait() do
+		if shared.NoCooldownArtifacts then
+			for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+				if v.Name == "ANGELFEATHERCD" or v.Name == "LannisCD" then
+					v:Remove()
+				end
+			end
 		end
-	end) 
-
+	end
 end)
--]]
 
+StatusTab:CreateToggle("No CoolDown Dodge", function(value) 
+    shared.CDDODGE = value
+    while wait() do
+		if shared.CDDODGE then
+			print("coming soon")
+		end
+	end
+end)
+
+StatusTab:CreateToggle("No DoubleJump CD", function(value) 
+    shared.NoDouble = value
+    while wait() do
+		if shared.NoDouble then
+			LocalSA.DoubleJumpingAvailable = true 
+		end
+	end
+end)
+
+StatusTab:CreateToggle("No Injuries", function(value) 
+    shared.NoInjuries = value
+    while wait() do
+		if shared.NoInjuries then
+			for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+				if v.Name == "Impaled" then
+					v:Remove()
+				end
+			end
+		end
+	end
+end)
+
+StatusTab:CreateToggle("No Fire", function(value) 
+    shared.NoFire = value
+    while wait() do
+		if shared.NoFire then
+			for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+				if v:IsA("Folder") then
+					if v.Name == "Flames" or v.Name == "WhiteFlames" or v.Name == "BlackFlames" or v.Name == "BlackFlamesStack" then
+						v:Remove()
+					end
+				end
+			end	
+        end
+    end
+end)
+
+StatusTab:CreateToggle("No Poison", function(value) 
+    shared.NOPOSITON = value
+    while wait() do
+        if shared.NOPOSITON then
+			for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+				if v:IsA("Folder") then
+					if v.Name == "Poison" then
+						v:Remove()
+					end
+				end
+			end
+        end
+    end
+end)
+
+
+StatusTab:CreateToggle("No Fall Damage", function(value) 
+    shared.NoFall = value
+	if shared.NoFall then
+		
+		game.Players.LocalPlayer.Character.Humanoid.FallingDown:Connect(function(isActive)
+			local Float = Instance.new('Part')
+			Float.Name = math.random(1,40000)
+			Float.Parent = game.Players.LocalPlayer.Character
+			Float.Transparency = 1
+			Float.Size = Vector3.new(6,1,6)
+			Float.Anchored = true
+			Float.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,-3.5,0)
+			Float.CanCollide = true
+
+			wait(0.4)
+
+			Float.CanCollide = false
+		end)
+
+	end
+	
+end)
+
+local ManaTab = Library:CreateTab("Mana", "Mana Tab")
+
+local ManaValue = 0
+
+ManaTab:CreateToggle("Mana Adjust", function(value) 
+    shared.InfMana = value
+    while wait() do
+        if shared.InfMana then
+			game:GetService("Players").LocalPlayer.Character.ManaCharge.Value = false
+
+			if game:GetService("Players").LocalPlayer.Character.Stats.Mana.Value >= ManaValue then
+
+				game:GetService("Players").LocalPlayer.Character.ManaChargeEnd:FireServer()
+
+			else
+
+				game:GetService("Players").LocalPlayer.Character.ManaChargeStart:FireServer()
+			end
+        end
+    end
+end)
+
+local Spells = {
+	["Ignis"] = 80;
+	["Gelidus"] = 80;
+	["Tenebris"] = 100;
+	["Gate"] = 83;
+	["Fimbulvetr"] = 85;
+	["Radium"] = 85;
+	["Percutiens"] = 65;
+}
+
+ManaTab:CreateToggle("Spell Adjust", function(value) 
+    shared.SpellAbjust = value
+    while wait() do
+		if shared.SpellAbjust then
+			for i,v in pairs(Spells) do
+				for I,V in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+					if V:IsA("Tool") then
+						if V.Name == i then
+							
+							game:GetService("Players").LocalPlayer.Character.ManaCharge.Value = false
+
+							if game:GetService("Players").LocalPlayer.Character.Stats.Mana.Value >= Spells[V.Name] then
+
+								game:GetService("Players").LocalPlayer.Character.ManaChargeEnd:FireServer()
+
+							else
+
+								game:GetService("Players").LocalPlayer.Character.ManaChargeStart:FireServer()
+							end
+						end
+					end
+				end
+			end
+        end
+    end
+end)
+
+
+ManaTab:CreateSlider("Mana Amount", 0, 100, function(arg) 
+    ManaValue = arg
+end)
+
+ManaTab:CreateSlider("Mana Climb Speed", 1, 350, function(arg) 
+    game.Players.LocalPlayer.Character.Stats.ClimbMult.Value = arg
+end)
 
 
 local VisualTab = Library:CreateTab("Visuals", "Visuals Tab")
@@ -386,7 +442,11 @@ local Success, ErrorStatement = pcall(function()
 	local NotificationBindable = Instance.new("BindableFunction")
 	NotificationBindable.OnInvoke = Callback
 	
-	
+	function AutoModKick()
+		if shared.AutoModPanic then
+			game.Players.LocalPlayer:Kick("\n\nSafely Kicked you from the game.\n")
+		end
+	end
 	
 	
 	for i,v in pairs(game.Players:GetPlayers()) do
@@ -407,6 +467,7 @@ local Success, ErrorStatement = pcall(function()
 					wait(6.5)
 					newmusic:Stop()
 				end)
+				AutoModKick()
 			end
 		end
 	end
@@ -428,6 +489,7 @@ local Success, ErrorStatement = pcall(function()
 					wait(6.5)
 					newmusic:Stop()
 				end)
+				AutoModKick()
 			end
 		end
 	end)
@@ -465,7 +527,7 @@ end
 
 game.Workspace.ChildAdded:Connect(function(v)
 	if v:IsA("Tool") then
-		if v.Name == "Lannis Amulet" or v.Name == "Fairfrozen" or v.Name == "Lost Bulwark" or v.Name == "Spider Cloak" or v.Name == "Philo Stone" or v.Name == "Betrayer's Amulet" or v.Name == "Angel Feather" or v.Name == "Lost Bulwark" or v.Name == "Spider Cloak" then
+		if v.Name == "Lannis Amulet" or v.Name == "Fairfrozen" or v.Name == "Lost Bulwark" or v.Name == "Spider Cloak" or v.Name == "Philo Stone" or v.Name == "Betrayer's Amulet" or v.Name == "Angel Feather" or v.Name == "Lost Bulwark" or v.Name == "Spider Cloak" or v.Name == "MemoryDisc" or v.Name == "Phoenix Feather" then
 			game.StarterGui:SetCore("SendNotification", {
 				Title = "Artifact Notify";
 				Text = v.Name .. " Has Spawned";
