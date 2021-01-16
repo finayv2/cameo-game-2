@@ -13,7 +13,7 @@ LocalPlayerTab:CreateToggle("No Stun & Cooldown", function(value)
         if shared.NoStun then
 			for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
 				if v:IsA("Folder") then
-					if v.Name == "PUNCHM2COOLDOWN" or v.Name == "Busy" or v.Name == "Superslow" or v.Name == "Comboing" or v.Name == "PunchCooldown" or v.Name == "CTag" or v.Name == "Helpless" or v.Name == "StepBlock" or v.Name == "Staggered" or v.Name == "Ragdolled" or v.Name == "Superamor" or v.Name == "NoSpeedUpdate" or v.Name == "manashield" or v.Name == "IFrames" or v.Name == "SnapCooldown" or v.Name == "BeserkCooldown" then
+					if v.Name == "PUNCHM2COOLDOWN" or v.Name == "Busy" or v.Name == "Superslow" or v.Name == "Comboing" or v.Name == "PunchCooldown" or v.Name == "CTag" or v.Name == "Helpless" or v.Name == "StepBlock" or v.Name == "Staggered" or v.Name == "Superamor" or v.Name == "manashield" or v.Name == "IFrames" or v.Name == "BeserkCooldown" then
 						v:Remove()
 					end
 				end
@@ -186,48 +186,6 @@ end)
 -- ! status tab
 local StatusTab = Library:CreateTab("Status", "Status Tab", "Dark")
 
-StatusTab:CreateToggle("No Curse Stacks", function(value) 
-    shared.NoCS = value
-    while wait() do
-        if shared.NoCS then
-			for i,v in pairs(game.Players.LocalPlayer.Character.Stats.CStacks:GetChildren()) do
-				v:Remove()
-			end
-        end
-    end
-end)
-
-StatusTab:CreateToggle("No Cooldown Artifacts", function(value) 
-    shared.NoCooldownArtifacts = value
-    while wait() do
-		if shared.NoCooldownArtifacts then
-			for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
-				if v.Name == "ANGELFEATHERCD" or v.Name == "LannisCD" then
-					v:Remove()
-				end
-			end
-		end
-	end
-end)
-
-StatusTab:CreateToggle("No CoolDown Dodge", function(value) 
-    shared.CDDODGE = value
-    while wait() do
-		if shared.CDDODGE then
-			print("coming soon")
-		end
-	end
-end)
-
-StatusTab:CreateToggle("No DoubleJump CD", function(value) 
-    shared.NoDouble = value
-    while wait() do
-		if shared.NoDouble then
-			LocalSA.DoubleJumpingAvailable = true 
-		end
-	end
-end)
-
 StatusTab:CreateToggle("No Injuries", function(value) 
     shared.NoInjuries = value
     while wait() do
@@ -240,37 +198,6 @@ StatusTab:CreateToggle("No Injuries", function(value)
 		end
 	end
 end)
-
-StatusTab:CreateToggle("No Fire", function(value) 
-    shared.NoFire = value
-    while wait() do
-		if shared.NoFire then
-			for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
-				if v:IsA("Folder") then
-					if v.Name == "Flames" or v.Name == "WhiteFlames" or v.Name == "BlackFlames" or v.Name == "BlackFlamesStack" then
-						v:Remove()
-					end
-				end
-			end	
-        end
-    end
-end)
-
-StatusTab:CreateToggle("No Poison", function(value) 
-    shared.NOPOSITON = value
-    while wait() do
-        if shared.NOPOSITON then
-			for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
-				if v:IsA("Folder") then
-					if v.Name == "Poison" then
-						v:Remove()
-					end
-				end
-			end
-        end
-    end
-end)
-
 
 StatusTab:CreateToggle("No Fall Damage", function(value) 
     shared.NoFall = value
@@ -295,6 +222,111 @@ StatusTab:CreateToggle("No Fall Damage", function(value)
 	
 end)
 
+StatusTab:CreateToggle("No Fire", function(value) 
+    shared.NoFire = value
+    while wait() do
+		if shared.NoFire then
+			for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+				if v:IsA("Folder") then
+					if v.Name == "Flames" or v.Name == "WhiteFlames" or v.Name == "BlackFlames" or v.Name == "BlackFlamesStack" then
+						v:Remove()
+					end
+				end
+			end	
+        end
+    end
+end)
+
+StatusTab:CreateToggle("No Curse Stacks", function(value) 
+    shared.NoCS = value
+    while wait() do
+        if shared.NoCS then
+			for i,v in pairs(game.Players.LocalPlayer.Character.Stats.CStacks:GetChildren()) do
+				v:Remove()
+			end
+        end
+    end
+end)
+
+
+StatusTab:CreateToggle("No Walkspeed Penality", function(value) 
+    shared.NwalksPEP = value
+    while wait() do
+        if shared.NwalksPEP then
+			for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+				if v.Name == "NoSpeedUpdate" then
+					v:Remove()
+				end
+			end
+        end
+    end
+end)
+
+StatusTab:CreateToggle("No Ragdoll", function(value) 
+    shared.NoRagdoll = value
+    while wait() do
+        if shared.NoRagdoll then
+			for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+				if v:IsA("Folder") then
+					if v.Name == "Ragdolled" then
+						v:Remove()
+					end
+				end
+			end
+        end
+    end
+end)
+
+
+StatusTab:CreateToggle("No Poison", function(value) 
+    shared.NOPOSITON = value
+    while wait() do
+        if shared.NOPOSITON then
+			for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+				if v:IsA("Folder") then
+					if v.Name == "Poison" then
+						v:Remove()
+					end
+				end
+			end
+        end
+    end
+end)
+
+
+
+StatusTab:CreateToggle("No Cooldown Artifacts", function(value) 
+    shared.NoCooldownArtifacts = value
+    while wait() do
+		if shared.NoCooldownArtifacts then
+			for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+				if v.Name == "ANGELFEATHERCD" or v.Name == "LannisCD" then
+					v:Remove()
+				end
+			end
+		end
+	end
+end)
+
+StatusTab:CreateToggle("No Cooldown Dodge", function(value) 
+    shared.CDDODGE = value
+    while wait() do
+		if shared.CDDODGE then
+			print("coming soon")
+		end
+	end
+end)
+
+StatusTab:CreateToggle("No Cooldown Jump", function(value) 
+    shared.NoDouble = value
+    while wait() do
+		if shared.NoDouble then
+			LocalSA.DoubleJumpingAvailable = true 
+		end
+	end
+end)
+
+
 local ManaTab = Library:CreateTab("Mana", "Mana Tab")
 
 local ManaValue = 0
@@ -312,6 +344,19 @@ ManaTab:CreateToggle("Mana Adjust", function(value)
 			else
 
 				game:GetService("Players").LocalPlayer.Character.ManaChargeStart:FireServer()
+			end
+        end
+    end
+end)
+
+ManaTab:CreateToggle("No Cooldown Snap", function(value) 
+    shared.NOCDSNAP = value
+    while wait() do
+		if shared.NOCDSNAP then
+			for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+				if v.Name == "SnapCooldown" then
+					v:Remove()
+				end
 			end
         end
     end
